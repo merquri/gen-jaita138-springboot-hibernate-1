@@ -24,7 +24,11 @@ public class CliManager {
         System.out.println("2. Salva un nuovo utente");
         System.out.println("3. Modificare i dettagli di un utente");
         System.out.println("4. Elimina un utente");
-        System.out.println("5. Esci");
+        System.out.println("5. Trovare tutti gli utenti con nome che inizia per A");
+        System.out.println("6. Trovare tutti gli utenti con credito superiore ai 10 euro");
+        System.out.println("7. Trovare tutti gli utenti con nome o cognome NULL");
+        System.out.println("8. Trovare tutti gli utenti con credito positivo ma inferiore ai 10 euro");
+        System.out.println("9. Esci");
 
         String strNum = sc.nextLine();
         int num = Integer.parseInt(strNum);
@@ -44,6 +48,15 @@ public class CliManager {
             delete();
                 break;
             case 5:
+            findA();
+            break;
+            case 6:
+            findTen();
+            case 7:
+            findNull();
+            case 8:
+            findLessTen();
+            case 9:
                 return;
             default:
                 System.out.println("Operazione non valida");
@@ -81,7 +94,7 @@ public class CliManager {
         System.out.println("credito:");
         String strCredito = sc.nextLine();
         int credito = Integer.parseInt(strCredito);
-        u.setCredito(credito);
+        u.setCredito(credito * 100);
 
         utenteService.save(u);
     }
@@ -132,4 +145,26 @@ public class CliManager {
         } else
             System.out.println("Utente non trovato");
         }
+
+    public void findA() {
+
+        List<Utente> u = utenteService.findByNomeStartingWith("A");
+        System.out.println(u);
+
+    }
+
+    public void findTen() {
+        List<Utente> u = utenteService.findByCreditoGreatherThan(10);
+        System.out.println(u);
+    }
+
+    public void findNull() {
+        List<Utente> u = utenteService.findByNomeNullOrCognomeNull();
+        System.out.println(u);
+    }
+
+    public void findLessTen() {
+        List<Utente> u = utenteService.findByCreditoBetween(0, 10*100);
+        System.out.println(u);
+    }
     }

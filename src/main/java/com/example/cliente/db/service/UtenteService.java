@@ -14,10 +14,6 @@ public class UtenteService {
     @Autowired
     private UtenteRepo utenteRepo;
 
-    /*
-     * - `findById`: recupera utente a partire dall'`id`
-     */
-
     public List<Utente> findAll() {
         return utenteRepo.findAll();
     }
@@ -34,4 +30,21 @@ public Utente findById(Long id) {
 
     return utenteRepo.findById(id).orElse(null);
 }
+
+public List<Utente> findByNomeStartingWith(String nome) {
+    return utenteRepo.findByNomeStartingWith(nome);
+}
+
+public List<Utente> findByCreditoGreatherThan(int credito) {
+    return utenteRepo.findByCreditoGreatherThan(credito);
+}
+
+public List<Utente> findByNomeNullOrCognomeNull() {
+    return utenteRepo.findByNomeNullOrCognomeNull();
+}
+
+public List<Utente> findByCreditoBetween(int min, int max) {
+    return utenteRepo.findByCreditoBetween(min, max);
+}
+
 }
