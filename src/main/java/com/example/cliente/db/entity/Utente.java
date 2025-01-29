@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Utente {
@@ -21,6 +22,9 @@ public class Utente {
     private String username;
 
     private int credito; // il valore deve essere espresso in centesimi di euro)
+
+    /* @ManyToOne
+    private Role role; */
 
     public Long getId() {
         return id;
