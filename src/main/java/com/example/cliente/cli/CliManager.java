@@ -148,23 +148,19 @@ public class CliManager {
 
     public void findA() {
 
-        List<Utente> u = utenteService.findByNomeStartingWith("A");
-        System.out.println(u);
+        System.out.println(utenteService.findByNomeStartingWithA());
 
     }
 
     public void findTen() {
-        List<Utente> u = utenteService.findByCreditoGreatherThan(10);
-        System.out.println(u);
+        System.out.println(utenteService.findByCreditoGreaterThan10());
     }
 
     public void findNull() {
-        List<Utente> u = utenteService.findByNomeNullOrCognomeNull();
-        System.out.println(u);
+        System.out.println(utenteService.findByNomeNullOrCognomeNull());
     }
 
     public void findLessTen() {
-        List<Utente> u = utenteService.findByCreditoBetween(0, 10*100);
-        System.out.println(u);
+        System.out.println(utenteService.findByCreditoBetween0And10());
     }
     }

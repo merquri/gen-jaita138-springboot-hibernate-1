@@ -17,8 +17,8 @@ public class Role {
 
     private String nome, descrizone;
 
-    /* @OneToMany(mappedBy = "role")
-    private List<Utente> utenti; */
+    @OneToMany(mappedBy = "role")
+    private List<Utente> utenti;
 
     public Long getId() {
         return id;

@@ -16,15 +16,17 @@ public class Utente {
 
     @Column(length = 64)
     private String nome;
+    @Column(length = 64)
     private String cognome;
+    @Column(length = 64)
     private String password;
     @Column(length = 128)
     private String username;
 
     private int credito; // il valore deve essere espresso in centesimi di euro)
 
-    /* @ManyToOne
-    private Role role; */
+    @ManyToOne
+    private Role role;
 
     public Long getId() {
         return id;

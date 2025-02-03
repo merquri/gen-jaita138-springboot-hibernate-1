@@ -31,20 +31,20 @@ public Utente findById(Long id) {
     return utenteRepo.findById(id).orElse(null);
 }
 
-public List<Utente> findByNomeStartingWith(String nome) {
-    return utenteRepo.findByNomeStartingWith(nome);
+public List<Utente> findByNomeStartingWithA() {
+    return utenteRepo.findByNomeStartingWith("a");
 }
 
-public List<Utente> findByCreditoGreatherThan(int credito) {
-    return utenteRepo.findByCreditoGreatherThan(credito);
+public List<Utente> findByCreditoGreaterThan10() {
+    return utenteRepo.findByCreditoGreaterThan(10*100);
 }
 
 public List<Utente> findByNomeNullOrCognomeNull() {
     return utenteRepo.findByNomeNullOrCognomeNull();
 }
 
-public List<Utente> findByCreditoBetween(int min, int max) {
-    return utenteRepo.findByCreditoBetween(min, max);
+public List<Utente> findByCreditoBetween0And10() {
+    return utenteRepo.findByCreditoBetween(0, 10*100);
 }
 
 }
