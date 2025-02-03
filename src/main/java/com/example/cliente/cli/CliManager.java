@@ -3,13 +3,16 @@ package com.example.cliente.cli;
 import java.util.List;
 import java.util.Scanner;
 
+import com.example.cliente.db.entity.Role;
 import com.example.cliente.db.entity.Utente;
+import com.example.cliente.db.service.RoleService;
 import com.example.cliente.db.service.UtenteService;
 
 public class CliManager {
 
     private Scanner sc;
     private UtenteService utenteService;
+    private RoleService roleService;
 
     public CliManager(UtenteService utenteService) {
         sc = new Scanner(System.in);
@@ -131,7 +134,20 @@ public class CliManager {
         int credito = Integer.parseInt(strCredito);
         u.setCredito(credito);
 
+        printRoles();
+        System.out.println("role id:");
+        Role role = roleService.findById(sc.nextLong());
+        u.setRole(role);
+        sc.nextLine();
+
         utenteService.save(u);
+        System.out.println("Utente salvato");
+    }
+
+    private void printRoles() {
+        System.out.println("Ruoli disponibili");
+        System.out.println(roleService.findAll());
+        System.out.println();
     }
 
     public void delete() {

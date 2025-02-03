@@ -76,6 +76,14 @@ public class Utente {
         this.credito = credito;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "Utente [\n" 
@@ -85,6 +93,7 @@ public class Utente {
         + " username="+ username + ",\n"
         + " password="+ password + ",\n"
         + " credito="+ credito + ",\n"
+        + " role=" + role + ",\n"
         + "]";
     }
 
