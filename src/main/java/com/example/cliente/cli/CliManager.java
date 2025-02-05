@@ -39,7 +39,7 @@ public class CliManager {
         switch (num) {
 
             case 1:
-            readAll();
+                readAll();
                 break;
             case 2:
                 insert();
@@ -48,17 +48,17 @@ public class CliManager {
                 edit();
                 break;
             case 4:
-            delete();
+                delete();
                 break;
             case 5:
-            findA();
-            break;
+                findA();
+                break;
             case 6:
-            findTen();
+                findTen();
             case 7:
-            findNull();
+                findNull();
             case 8:
-            findLessTen();
+                findLessTen();
             case 9:
                 return;
             default:
@@ -76,72 +76,25 @@ public class CliManager {
     }
 
     private void insert() {
-        Utente u = new Utente();
-        
-        System.out.println("nome:");
-        String nome = sc.nextLine();
-        u.setNome(nome);
 
-        System.out.println("cognome:");
-        String cognome = sc.nextLine();
-        u.setCognome(cognome);
+        Utente utente = new Utente();
+        save(utente);
 
-        System.out.println("username:");
-        String username = sc.nextLine();
-        u.setUsername(username);
-
-        System.out.println("password:");
-        String password = sc.nextLine();
-        u.setPassword(password);
-
-        System.out.println("credito:");
-        String strCredito = sc.nextLine();
-        int credito = Integer.parseInt(strCredito);
-        u.setCredito(credito * 100);
-
-        utenteService.save(u);
     }
 
     public void edit() {
+
         System.out.print("Modifica l'id:");
         String strId = sc.nextLine();
         Long id = Long.parseLong(strId);
-        Utente u = utenteService.findById(id);
+        Utente utente = utenteService.findById(id);
 
-        if (u == null) {
+        if (utente == null) {
             System.out.println("Utente non trovato");
             return;
         }
 
-        System.out.println("nome:");
-        String nome = sc.nextLine();
-        u.setNome(nome);
-
-        System.out.println("cognome:");
-        String cognome = sc.nextLine();
-        u.setCognome(cognome);
-
-        System.out.println("username:");
-        String username = sc.nextLine();
-        u.setUsername(username);
-
-        System.out.println("password:");
-        String password = sc.nextLine();
-        u.setPassword(password);
-
-        System.out.println("credito:");
-        String strCredito = sc.nextLine();
-        int credito = Integer.parseInt(strCredito);
-        u.setCredito(credito);
-
-        printRoles();
-        System.out.println("role id:");
-        Role role = roleService.findById(sc.nextLong());
-        u.setRole(role);
-        sc.nextLine();
-
-        utenteService.save(u);
-        System.out.println("Utente salvato");
+        save(utente);
     }
 
     private void printRoles() {
@@ -160,7 +113,8 @@ public class CliManager {
             System.out.println("L'utente è stato cancellato");
         } else
             System.out.println("Utente non trovato");
-        }
+
+    }
 
     public void findA() {
 
@@ -179,4 +133,51 @@ public class CliManager {
     public void findLessTen() {
         System.out.println(utenteService.findByCreditoBetween0And10());
     }
+
+    private void save(Utente utente) {
+
+        boolean isInsert = (utente.getId() == null);
+
+        System.out.println("nome:" + (isInsert
+                ? ""
+                : "(" + utente.getNome() + ")"));
+        String nome = sc.nextLine();
+        utente.setNome(nome);
+
+        System.out.println("cognome:" + (isInsert
+                ? ""
+                : "(" + utente.getCognome() + ")"));
+        String cognome = sc.nextLine();
+        utente.setCognome(cognome);
+
+        System.out.println("username:" + (isInsert
+                ? ""
+                : "(" + utente.getUsername() + ")"));
+        String username = sc.nextLine();
+        utente.setUsername(username);
+
+        System.out.println("password:" + (isInsert
+                ? ""
+                : "(" + utente.getPassword() + ")"));
+        String password = sc.nextLine();
+        utente.setPassword(password);
+
+        System.out.println("credito:" + (isInsert
+                ? ""
+                : "(" + utente.getCredito() + ")"));
+        String strCredito = sc.nextLine();
+        int credito = Integer.parseInt(strCredito);
+        utente.setCredito(credito * 100);
+
+        printRoles();
+
+        System.out.println("role:" + (isInsert
+                ? ""
+                : "(" + utente.getRole() + ")"));
+        Role role = roleService.findById(sc.nextLong());
+        utente.setRole(role);
+        sc.nextLine();
+
+        utenteService.save(utente);
     }
+}
