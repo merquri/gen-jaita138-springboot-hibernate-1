@@ -1,10 +1,14 @@
 package com.example.cliente.db.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -27,6 +31,9 @@ public class Utente {
 
     @ManyToOne
     private Role role;
+
+    @ManyToMany
+    private List<SubReddit> subreddits;
 
     public Long getId() {
         return id;
@@ -84,17 +91,39 @@ public class Utente {
         this.role = role;
     }
 
+    public List<SubReddit> getSubreddits() {
+        return this.subreddits;
+    }
+
+    public void setSubreddits(List<SubReddit> subreddits) {
+        this.subreddits = subreddits;
+    }
+
+    public void addSubreddit(SubReddit subreddit) {
+        if (this.subreddits == null) {
+            this.subreddits = new ArrayList<>();
+
+            this.subreddits.add(subreddit);
+        }
+    }
+
+    public void clearSubreddit() {
+
+        if (this.subreddits != null) {
+        this.subreddits = null; }
+    }
+
     @Override
     public String toString() {
-        return "Utente [\n" 
-        + " id="+ id + ",\n"
-        + " nome="+ nome + ",\n"
-        + " cognome="+ cognome + ",\n"
-        + " username="+ username + ",\n"
-        + " password="+ password + ",\n"
-        + " credito="+ credito + ",\n"
-        + " role=" + role + ",\n"
-        + "]";
+        return "Utente [\n"
+                + " id=" + id + ",\n"
+                + " nome=" + nome + ",\n"
+                + " cognome=" + cognome + ",\n"
+                + " username=" + username + ",\n"
+                + " password=" + password + ",\n"
+                + " credito=" + credito + ",\n"
+                + " role=" + role + ",\n"
+                + "]";
     }
 
 }
